@@ -11,8 +11,8 @@ const MainStack = () => {
     <Stack.Navigator>
         <Stack.Screen 
             name="Home" 
+            options={{headerShown: false}} 
             component={HomeScreen} 
-            headerShown={false} 
         />
     </Stack.Navigator>
   );
