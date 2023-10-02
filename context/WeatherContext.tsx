@@ -1,9 +1,10 @@
-import React, { createContext, useContext, useState, } from 'react';
-import { Axios } from 'axios';
+import React, { createContext, useContext, useState, useEffect } from 'react';
+import axios from 'axios';
 
 import { WeatherData, WeatherContextType } from '../models/WeatherData';
 import { WeatherProviderProps } from '../models/WeatherProviderProps';
 import { useCurrentWeather } from '../hooks/useCurrentWeather';
+import { fetchWeatherData } from '../api/Weather';
 
 //const API_URL: string = `http://api.weatherapi.com/v1/current.json?key=89e9d9cf56fa4af2a1e174847230210&q=London&aqi=no` 
 
@@ -18,10 +19,40 @@ export const useWeather = () => {
 }
 
 export const WeatherProvider = ({ children } : WeatherProviderProps) => {
+    const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
+    const [city, setCity] = useState<string>(''); 
+
+useEffect(() => {
     
+    const fetchWeatherData = async (city: string) => {
+        try {
+            const apiKey = '89e9d9cf56fa4af2a1e174847230210';
+            
+            const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
+            
+            const response = await axios.get(apiUrl);  
+            const data: WeatherData = response.data; 
+    
+            console.log(data)
+            setWeatherData(data);
+        
+        } catch (error) {
+                console.error('Error fetching weather data:', error);
+            }
+      };
+
+    },[city])
+
 
     return (
-        <
+        <WeatherContext.Provider
+            value={{
+                setCity,
+                weatherData,
+                fetchWeatherData
+            }}>
+        </WeatherContext.Provider>
+        
     )
- }
+};
 

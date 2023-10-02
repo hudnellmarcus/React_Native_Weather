@@ -9,8 +9,8 @@ export interface WeatherData {
 };
 
 export type WeatherContextType = {
-    fetchWeatherData: ( data: WeatherData) => Promise<void>
-    setSearchTerm: React.Dispatch<React.SetStateAction<string>>; 
+    fetchWeatherData: ( city: string) => Promise<WeatherData | undefined>
+    setCity: React.Dispatch<React.SetStateAction<string>>; 
     weatherData: WeatherData | null; 
 
 }
