@@ -1,11 +1,20 @@
-import * as React from 'react'
+import React, { useEffect } from 'react'
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient'; 
 import { SafeAreaView } from 'react-native-safe-area-context';
 
 import SearchBar from '../components/SearchBar';
+import CurrentWeather from '../components/CurrentWeather';
+
+import { useWeather } from '../context/WeatherContext';
+
 
 const HomeScreen = () => {
+    const { weatherData  } = useWeather(); 
+
+   
+
+
     return (
         <LinearGradient
                 colors={['rgba(228, 238, 100, 1)',  
@@ -22,6 +31,9 @@ const HomeScreen = () => {
                         <View style={styles.titleContainer}>
                             <Text style={styles.title}>Los Angeles, CA</Text>
                         </View>
+                    <View>
+                        <CurrentWeather />
+                    </View>
                 </SafeAreaView>
             </View>
         </LinearGradient>

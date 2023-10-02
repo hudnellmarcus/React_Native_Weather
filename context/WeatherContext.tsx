@@ -3,7 +3,6 @@ import axios from 'axios';
 
 import { WeatherData, WeatherContextType } from '../models/WeatherData';
 import { WeatherProviderProps } from '../models/WeatherProviderProps';
-import { useCurrentWeather } from '../hooks/useCurrentWeather';
 import { fetchWeatherData } from '../api/Weather';
 
 //const API_URL: string = `http://api.weatherapi.com/v1/current.json?key=89e9d9cf56fa4af2a1e174847230210&q=London&aqi=no` 
@@ -20,11 +19,11 @@ export const useWeather = () => {
 
 export const WeatherProvider = ({ children } : WeatherProviderProps) => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
-    const [city, setCity] = useState<string>(''); 
+    const [city, setCity] = useState<string>('miami'); 
 
 useEffect(() => {
     
-    const fetchWeatherData = async (city: string) => {
+    const fetchWeather = async (city: string) => {
         try {
             const apiKey = '89e9d9cf56fa4af2a1e174847230210';
             
@@ -34,12 +33,15 @@ useEffect(() => {
             const data: WeatherData = response.data; 
     
             console.log(data)
+            console.log(`city: ${city}`)
             setWeatherData(data);
         
         } catch (error) {
                 console.error('Error fetching weather data:', error);
             }
       };
+
+        fetchWeather(city); 
 
     },[city])
 
@@ -49,8 +51,9 @@ useEffect(() => {
             value={{
                 setCity,
                 weatherData,
-                fetchWeatherData
+                //fetchWeatherData: fetchWeatherData
             }}>
+                { children }
         </WeatherContext.Provider>
         
     )
