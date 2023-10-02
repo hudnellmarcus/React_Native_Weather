@@ -1,9 +1,9 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import axios from 'axios';
 
-import { WeatherData, WeatherContextType } from '../models/WeatherData';
+import { WeatherData } from '../models/WeatherData';
 import { WeatherProviderProps } from '../models/WeatherProviderProps';
-import { fetchWeatherData } from '../api/Weather';
+import { WeatherContextType } from '../types/WeatherContextType';
 
 //const API_URL: string = `http://api.weatherapi.com/v1/current.json?key=89e9d9cf56fa4af2a1e174847230210&q=London&aqi=no` 
 
