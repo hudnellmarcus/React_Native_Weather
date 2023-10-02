@@ -1,9 +1,11 @@
 import * as React from 'react'; 
+import { useState } from 'react';
 
 import { StyleSheet, TextInput, View, Keyboard } from 'react-native';
 
 
 const SearchBar = () => {
+    const [ cities, setCities ] = useState<null>(null)
     return (
         <View style={styles.searchBar}>
             <TextInput
@@ -12,6 +14,7 @@ const SearchBar = () => {
                 style={styles.textInput}
             />
         </View>
+
     )
 }
 
