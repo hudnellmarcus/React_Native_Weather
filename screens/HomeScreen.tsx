@@ -11,7 +11,6 @@ import { useWeather } from '../context/WeatherContext';
 
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
-
    
 
 
@@ -28,9 +27,6 @@ const HomeScreen = () => {
                     <View style={styles.searchContainer}>
                         <SearchBar />
                     </View>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title}>Los Angeles, CA</Text>
-                        </View>
                     <View>
                         <CurrentWeather />
                     </View>
