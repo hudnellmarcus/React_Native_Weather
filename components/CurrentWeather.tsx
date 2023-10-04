@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useWeather } from "../context/WeatherContext";
+import { useCityInput } from "../context/CityContext";
 
 
 
 
 const CurrentWeather = () => {
     const { weatherData } = useWeather(); 
-   
+    const { city } = useCityInput();  
 
     if (!weatherData) {
         return (

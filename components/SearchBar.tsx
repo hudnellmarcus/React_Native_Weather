@@ -1,10 +1,10 @@
 import * as React from 'react'; 
 import { useState } from 'react';
 
-import { StyleSheet, TextInput, View, Keyboard, FlatList, TouchableOpacity, Text } from 'react-native';
+import { StyleSheet, TextInput, View, TouchableOpacity, Text } from 'react-native';
 import { useCityInput } from '../context/CityContext';
-import { useWeather } from '../context/WeatherContext';
-import { SearchBarProps } from 'react-native-screens';
+//import { useWeather } from '../context/WeatherContext';
+//import { SearchBarProps } from 'react-native-screens';
 import { getSearchResults } from '../hooks/useSearch'
 import { SearchData } from '../models/SearchData';
 
@@ -53,6 +53,7 @@ const SearchBar = () => {
                   searchResults.map((result, index) => (
                     <TouchableOpacity key={index}
                         style={styles.locations}
+                        onPress={() => setCity(result.name)}
                     >
                         <Text style={styles.resultText}>{result.name}, {result.country} </Text>
                     </TouchableOpacity>
