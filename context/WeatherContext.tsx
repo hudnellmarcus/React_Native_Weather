@@ -20,13 +20,11 @@ export const useWeather = () => {
 
 export const fetchWeather = async (city: string): Promise<WeatherData | null> => {
     try {
-        const apiKey = '89e9d9cf56fa4af2a1e174847230210';
-    
+        const apiKey = '89e9d9cf56fa4af2a1e174847230210';  
         const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
     
         const response = await axios.get(apiUrl);  
         const data: WeatherData = response.data; 
-
         //console.log(data)
         //console.log(`city: ${city}`)
         return data;
@@ -58,7 +56,7 @@ export const WeatherProvider = ({ children } : WeatherProviderProps) => {
             finally {
                 setLoading(false)
             }
-      }; 
+        }; 
             fetchWeatherData(city)
 
     },[city])
