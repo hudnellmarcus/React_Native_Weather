@@ -7,12 +7,12 @@ import SearchBar from '../components/SearchBar';
 import CurrentWeather from '../components/CurrentWeather';
 
 import { useWeather } from '../context/WeatherContext';
+import { useCityInput } from '../context/CityContext';
 
 
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
-
-   
+    const { city, setCity } = useCityInput(); 
 
 
     return (
@@ -28,9 +28,6 @@ const HomeScreen = () => {
                     <View style={styles.searchContainer}>
                         <SearchBar />
                     </View>
-                        <View style={styles.titleContainer}>
-                            <Text style={styles.title}>Los Angeles, CA</Text>
-                        </View>
                     <View>
                         <CurrentWeather />
                     </View>
