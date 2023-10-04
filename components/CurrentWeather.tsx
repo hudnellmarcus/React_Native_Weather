@@ -2,7 +2,8 @@ import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
 import { useWeather } from "../context/WeatherContext";
 import { useCityInput } from "../context/CityContext";
-
+import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
+import { faDroplet, faClock, faWind } from "@fortawesome/free-solid-svg-icons";
 
 
 
@@ -18,7 +19,8 @@ const CurrentWeather = () => {
         )
     };
 
-    const { location, current } = weatherData    
+    const { location, current } = weatherData 
+    const locationName = location.name + ', ' + location.country   
     
     if (!location || !current) {
         return <Text>Weather info unavailable</Text>
@@ -26,16 +28,31 @@ const CurrentWeather = () => {
 
     return (
         <View style={styles.container}>
-            <Text style={styles.title}>{location.name}, {location.region}</Text>
+            <Text style={{ ...styles.title, fontSize: locationName.length > 29 ? 18 : 30}}>
+                {locationName}
+            </Text>
             <Image
                 source={{uri:`https:${current.condition.icon}`}}
                 style={styles.image}
             />
             <View style={styles.conditionsContainer}>
                 <Text style={styles.condition}>{current.condition.text}</Text>
-                <Text style={styles.temp}>{current.temp_f}&deg;F</Text>
+                <Text style={styles.temp}>{current.temp_f.toFixed(0)}&deg;F</Text>
             </View> 
-
+            <View style={styles.detailsContainer}>
+                <View style={styles.details}>
+                    <FontAwesomeIcon icon={faDroplet} size={30}/>
+                    <Text style={styles.detailsText}>{current.humidity}%</Text>
+                </View>
+                <View style={styles.details}>
+                    <FontAwesomeIcon icon={faClock} size={30}/>
+                    <Text style={styles.detailsText}>{location.localtime.split(' ')[1]}</Text>
+                </View>
+                <View style={styles.details}>
+                    <FontAwesomeIcon icon={faWind} size={30}/>
+                    <Text style={styles.detailsText}>{current.wind_mph}</Text>
+                </View>
+            </View>
         </View>
     )
 };
@@ -53,7 +70,6 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
-        fontSize: 48,
         color: 'white'
     },
     temp: {
@@ -73,7 +89,27 @@ const styles = StyleSheet.create({
     condition: {
         color: 'white',
         fontSize: 36,
-    }
+    },
+    detailsContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        padding: 10,
+        marginTop: -100
+    },
+    details: {
+        flex: 1,
+        padding: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        width: 50,
+        height: 75,
+    },
+    detailsText: {
+        color: 'white',
+        fontSize: 20,
+        padding: 10,
+    },
 })
 
 export default CurrentWeather; 
