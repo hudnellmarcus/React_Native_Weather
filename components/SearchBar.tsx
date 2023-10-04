@@ -47,7 +47,8 @@ const SearchBar = () => {
                     searchResults ?
                   searchResults.map((result, index) => (
                     <TouchableOpacity key={index}
-                        style={styles.locations}>
+                        style={styles.locations}
+                    >
                         <Text>{result.name}, {result.country}, {result.region} </Text>
                     </TouchableOpacity>
                    ))
