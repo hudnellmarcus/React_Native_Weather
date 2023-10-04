@@ -13,7 +13,7 @@ import { useCityInput } from '../context/CityContext';
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
     const { city, setCity } = useCityInput(); 
-
+   // const { current, location } = weatherData; 
 
     return (
         <LinearGradient

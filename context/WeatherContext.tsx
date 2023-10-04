@@ -5,6 +5,7 @@ import { WeatherData } from '../models/WeatherData';
 import { WeatherProviderProps } from '../models/WeatherProviderProps';
 import { WeatherContextType } from '../types/WeatherContextType';
 import { useCityInput } from './CityContext';
+import { ActivityIndicator } from 'react-native';
 
 
 const WeatherContext = createContext<WeatherContextType | undefined>(undefined)
@@ -31,13 +32,14 @@ export const fetchWeather = async (city: string): Promise<WeatherData | null> =>
         return data;
 
     } catch (error) {
-        console.error('Error fetching weather data:', error);
+        console.error('Error fetching weather data(provider):', error);
         return null
         }
 }; 
 
 export const WeatherProvider = ({ children } : WeatherProviderProps) => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
+    const [loading, setLoading] = useState(true); 
     const { city } = useCityInput(); 
 
     useEffect(() => {
@@ -50,13 +52,22 @@ export const WeatherProvider = ({ children } : WeatherProviderProps) => {
                 setWeatherData(data);
         
             } catch (error) {
-                console.error('Error fetching weather data:', error);
+                console.error('Error loading weather data:', error);
                 }
+            
+            finally {
+                setLoading(false)
+            }
       }; 
             fetchWeatherData(city)
 
     },[city])
 
+    if (loading) {
+        return (
+            <ActivityIndicator size='large' />
+        )
+    }
 
     return (
         <WeatherContext.Provider
