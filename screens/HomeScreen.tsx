@@ -7,11 +7,12 @@ import SearchBar from '../components/SearchBar';
 import CurrentWeather from '../components/CurrentWeather';
 
 import { useWeather } from '../context/WeatherContext';
+import { useCityInput } from '../context/CityContext';
 
 
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
-   
+    const { city, setCity } = useCityInput(); 
 
 
     return (

@@ -1,4 +1,5 @@
 export interface SearchProps {
     city?: string;
-    zip?: number; 
+    zip?: number;
+    setCity: React.Dispatch<React.SetStateAction<string>>; 
 }

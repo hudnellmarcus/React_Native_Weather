@@ -5,18 +5,21 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import { WeatherProvider } from './context/WeatherContext';
 
 import MainStack from './navigation/HomeNavigator';
+import { CityInputProvider } from './context/CityContext';
 
 function App() {
 
   return (
-    <WeatherProvider>
-    <NavigationContainer>
-        <SafeAreaProvider>
-          <StatusBar style="auto" />
-            <MainStack />
-        </SafeAreaProvider>
-    </NavigationContainer>
-    </WeatherProvider>
+    <CityInputProvider>
+      <WeatherProvider>
+        <NavigationContainer>
+          <SafeAreaProvider>
+            <StatusBar style="auto" />
+              <MainStack />
+          </SafeAreaProvider>
+        </NavigationContainer>
+      </WeatherProvider>
+    </CityInputProvider>
     
   )
 }
