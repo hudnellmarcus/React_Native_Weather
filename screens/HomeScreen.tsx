@@ -8,6 +8,7 @@ import CurrentWeather from '../components/CurrentWeather';
 
 import { useWeather } from '../context/WeatherContext';
 import { useCityInput } from '../context/CityContext';
+import ForecastComponent from '../components/Forecast';
 
 
 const HomeScreen = () => {
@@ -15,27 +16,9 @@ const HomeScreen = () => {
     const { city, setCity } = useCityInput(); 
    // const { current, location } = weatherData; 
 
-    return (
-        <LinearGradient
-                colors={['rgba(228, 238, 100, 1)',  
-                         'rgba(69, 82, 252, 1)', 
-                         'rgba(69, 82, 252, 0.5)', 
-                        ]}
-                style={styles.gradient}
-            >
-            <View style={styles.container}>
-                <SafeAreaView style={{flex: 1}}>
-                    <View style={styles.searchContainer}>
-                        <SearchBar />
-                    </View>
-                    <View>
-                        <CurrentWeather />
-                    </View>
-                </SafeAreaView>
-            </View>
-        </LinearGradient>
-           
-    );
+    <View style={styles.forecast}>
+    <ForecastComponent />
+</View>
 };
 
 const styles = StyleSheet.create({
@@ -77,6 +60,9 @@ const styles = StyleSheet.create({
         marginRight: 4,
         marginTop: 10
     },
+    forecast: {
+        flex: 1
+    }
 
 })
 
