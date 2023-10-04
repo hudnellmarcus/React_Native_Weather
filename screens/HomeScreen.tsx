@@ -14,7 +14,7 @@ import ForecastComponent from '../components/Forecast';
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
     const { city, setCity } = useCityInput(); 
-
+   // const { current, location } = weatherData; 
 
     <View style={styles.forecast}>
     <ForecastComponent />

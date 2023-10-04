@@ -7,4 +7,7 @@ export interface CurrentWeather {
     feelslike_c: number;
     feelslike_f: number;
     condition: Condition; 
+    humidity: number;
+    wind_mph: number; 
+
 };
