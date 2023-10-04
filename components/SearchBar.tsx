@@ -40,10 +40,10 @@ const SearchBar = () => {
         <View style={styles.searchContainer}>
             <View style={styles.searchBar}>
                 <TextInput
-                placeholder='Search city' 
-                placeholderTextColor={'gray'}
-                style={styles.textInput}
-                onChangeText={(value)=>handleSearch(value)}
+                    placeholder='Search city' 
+                    placeholderTextColor={'gray'}
+                    style={styles.textInput}
+                    onChangeText={(value)=>handleSearch(value)}
                 />
             </View>
                 

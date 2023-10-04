@@ -13,9 +13,9 @@ const CurrentWeather = () => {
 
     if (!weatherData) {
         return (
-        <View style={styles.loading}>
-            <Text style={styles.condition}>Choose your city to see the forecast.</Text>
-        </View>
+            <View style={styles.loading}>
+                <Text style={styles.condition}>Choose your city to see the forecast.</Text>
+            </View>
         )
     };
 

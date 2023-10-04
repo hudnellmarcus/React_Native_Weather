@@ -15,10 +15,28 @@ const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
     const { city, setCity } = useCityInput(); 
    // const { current, location } = weatherData; 
-
-    <View style={styles.forecast}>
-    <ForecastComponent />
-</View>
+    
+   return (
+        <LinearGradient
+            colors={['rgba(228, 238, 100, 1)',  
+                     'rgba(69, 82, 252, 1)', 
+                     'rgba(69, 82, 252, 0.5)', 
+                    ]}
+            style={styles.gradient}
+        >
+            <View style={styles.container}>
+                <SafeAreaView style={{flex: 1}}>
+                    <View style={styles.searchContainer}>
+                        <SearchBar />
+                    </View>
+                    <View>
+                        <CurrentWeather />
+                    </View>
+                </SafeAreaView>
+            </View>
+        </LinearGradient>
+       
+    );
 };
 
 const styles = StyleSheet.create({

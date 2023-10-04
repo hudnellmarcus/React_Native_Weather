@@ -15,19 +15,20 @@ const ForecastComponent = () => {
     useEffect(() => {
         const fetchForecast = async () => {
             if (!city) {
-            return
+                return
             }
         
             try {
                 const results = await getForecast(city);
                 setForecast(results);
-                console.log('forecast:', forecast);
+                //console.log('forecast:', forecast);
                 return
             } catch (error) {
                 console.error('Error fetching forecast data', error);
             }
         }
-        fetchForecast(); 
+            fetchForecast(); 
+
     },[city])
 
 
@@ -61,7 +62,6 @@ const ForecastComponent = () => {
 
 const styles = StyleSheet.create({
     forecast: {
-
     }
 })
 
