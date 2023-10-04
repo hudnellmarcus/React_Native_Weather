@@ -10,7 +10,11 @@ const CurrentWeather = () => {
    
 
     if (!weatherData) {
-        return <Text>Loading..</Text>
+        return (
+        <View style={styles.loading}>
+            <Text style={styles.condition}>Choose your city to see the forecast.</Text>
+        </View>
+        )
     };
 
     const { location, current } = weatherData    
@@ -41,6 +45,11 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'flex-start',
         marginTop: 100
+    },
+    loading: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     title: {
         fontSize: 48,

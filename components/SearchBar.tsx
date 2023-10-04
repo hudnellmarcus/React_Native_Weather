@@ -19,11 +19,16 @@ const SearchBar = () => {
 
     const handleSearch = async (value: string) => {
         try {
+            // clear searchResults when input is empty 
+            if (value === ('')) {
+                setSearchResults([]); 
+                return; 
+            }
             //setCity(searchItem);
             const results = await getSearchResults(value);
             setSearchResults(results);
             //console.log('results', results); 
-            console.log( searchResults);
+            //console.log( searchResults);
             return 
         
         } catch (error) {
@@ -36,7 +41,7 @@ const SearchBar = () => {
             <View style={styles.searchBar}>
                 <TextInput
                 placeholder='Search city' 
-                placeholderTextColor={'red'}
+                placeholderTextColor={'gray'}
                 style={styles.textInput}
                 onChangeText={(value)=>handleSearch(value)}
                 />
@@ -49,7 +54,7 @@ const SearchBar = () => {
                     <TouchableOpacity key={index}
                         style={styles.locations}
                     >
-                        <Text>{result.name}, {result.country}, {result.region} </Text>
+                        <Text style={styles.resultText}>{result.name}, {result.country} </Text>
                     </TouchableOpacity>
                    ))
                 :
@@ -83,13 +88,23 @@ textInput: {
 locationView: {
     //backgroundColor: 'light gray',
     position: 'absolute',
-    marginTop: 75,
-    padding: 12
+    width: '100%',
+    marginTop: 50,
+    padding: 12,
 },
 locations: {
     flex: 1,
     flexDirection: 'row',
     borderColor: 'gray',
+    borderWidth: 1,
+    borderRadius: 10,
+    padding: 10,
+    opacity: 0.9,
+    backgroundColor:'rgba(211, 211, 211, 0.7)'
+},
+resultText: {
+    color: 'white',
+    fontSize: 16
 }
 }); 
 
