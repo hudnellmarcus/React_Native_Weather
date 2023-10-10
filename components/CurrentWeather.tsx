@@ -1,5 +1,6 @@
 import React from "react";
 import { StyleSheet, View, Text, Image } from "react-native";
+import { LinearGradient } from 'expo-linear-gradient'; 
 import { useWeather } from "../context/WeatherContext";
 import { useCityInput } from "../context/CityContext";
 import { FontAwesomeIcon } from '@fortawesome/react-native-fontawesome';
@@ -12,29 +13,57 @@ const CurrentWeather = () => {
     const { city } = useCityInput();  
 
     if (!weatherData) {
-        return (
+        return (  
+        <LinearGradient
+            colors={['rgba(228, 238, 100, 1)',  
+                     'rgba(69, 82, 252, 1)', 
+                     'rgba(69, 82, 252, 0.5)', 
+                    ]}
+            style={styles.gradient}
+        >
+
             <View style={styles.loading}>
                 <Text style={styles.condition}>Choose your city to see the forecast.</Text>
             </View>
+        </LinearGradient>
         )
     };
 
     const { location, current } = weatherData 
-    const locationName = location.name + ', ' + location.country   
+    const locationName = location.name + ', ' + location.country
+    const currentTime = new Date(location.localtime).getHours();
+
+    //console.log(currentTime)    
+
+    const isNightTime = currentTime > 19 || currentTime < 7;  
+    const gradients = isNightTime ? 
+    [   'rgba(6, 12, 80, 1.0)',  
+        'rgba(94, 29, 128, 1.0)', 
+        'rgba(6, 12, 80, 0.5)', 
+    ] : 
+    [   'rgba(228, 238, 100, 1)',  
+        'rgba(69, 82, 252, 1)', 
+        'rgba(69, 82, 252, 0.5)', 
+    ]           
     
     if (!location || !current) {
         return <Text>Weather info unavailable</Text>
     }
 
-    return (
-        <View style={styles.container}>
-            <Text style={{ ...styles.title, fontSize: locationName.length > 29 ? 18 : 30}}>
+    return (  
+        <LinearGradient
+            colors={gradients} 
+        
+            style={styles.gradient}
+        >
+            <View style={styles.container}>
+                <Text style={{ ...styles.title, fontSize: locationName.length > 29 ? 18 : 30}}>
                 {locationName}
-            </Text>
-            <Image
+                </Text>
+                <Image
                 source={{uri:`https:${current.condition.icon}`}}
                 style={styles.image}
-            />
+                />
             <View style={styles.conditionsContainer}>
                 <Text style={styles.condition}>{current.condition.text}</Text>
                 <Text style={styles.temp}>{current.temp_f.toFixed(0)}&deg;F</Text>
@@ -48,12 +77,13 @@ const CurrentWeather = () => {
                     <FontAwesomeIcon icon={faClock} size={30}/>
                     <Text style={styles.detailsText}>{location.localtime.split(' ')[1]}</Text>
                 </View>
-                <View style={styles.details}>
-                    <FontAwesomeIcon icon={faWind} size={30}/>
-                    <Text style={styles.detailsText}>{current.wind_mph}</Text>
+                    <View style={styles.details}>
+                        <FontAwesomeIcon icon={faWind} size={30}/>
+                        <Text style={styles.detailsText}>{current.wind_mph}</Text>
+                    </View>
                 </View>
             </View>
-        </View>
+        </LinearGradient>
     )
 };
 
@@ -70,7 +100,8 @@ const styles = StyleSheet.create({
         justifyContent: 'center'
     },
     title: {
-        color: 'white'
+        color: 'white',
+        marginBottom: 8
     },
     temp: {
         fontWeight: '500',
@@ -110,6 +141,13 @@ const styles = StyleSheet.create({
         fontSize: 20,
         padding: 10,
     },
+    gradient: {
+        // flex: 1,
+         width: '100%',
+         height: '100%',
+         //alignItems: 'center',
+         //justifyContent: 'center'
+     },
 })
 
 export default CurrentWeather; 

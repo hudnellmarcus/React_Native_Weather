@@ -19,14 +19,15 @@ export const useWeather = () => {
 }
 
 export const fetchWeather = async (city: string): Promise<WeatherData | null> => {
+        //const { setCity } = useCityInput();
     try {
-        const apiKey = '89e9d9cf56fa4af2a1e174847230210';  
-        const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`
+        const apiKey = 'a8b9b5466d0b4ffe8a752428231010';  
+        const apiUrl = `http://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${city}&aqi=no`;
     
         const response = await axios.get(apiUrl);  
         const data: WeatherData = response.data; 
         //console.log(data)
-        //console.log(`city: ${city}`)
+        //console.log(`city: ${city}`) 
         return data;
 
     } catch (error) {
@@ -38,7 +39,7 @@ export const fetchWeather = async (city: string): Promise<WeatherData | null> =>
 export const WeatherProvider = ({ children } : WeatherProviderProps) => {
     const [weatherData, setWeatherData] = useState<WeatherData | null>(null)
     const [loading, setLoading] = useState(true); 
-    const { city } = useCityInput(); 
+    const { city, setCity } = useCityInput(); 
 
     useEffect(() => {
     
@@ -46,7 +47,7 @@ export const WeatherProvider = ({ children } : WeatherProviderProps) => {
             try {
                 const data = await fetchWeather(city)
                 //console.log(data)
-                //console.log(`city: ${city}`)
+                console.log(`city: ${city}`)
                 setWeatherData(data);
         
             } catch (error) {
@@ -58,6 +59,7 @@ export const WeatherProvider = ({ children } : WeatherProviderProps) => {
             }
         }; 
             fetchWeatherData(city)
+        
 
     },[city])
 

@@ -14,28 +14,18 @@ import ForecastComponent from '../components/Forecast';
 const HomeScreen = () => {
     const { weatherData  } = useWeather(); 
     const { city, setCity } = useCityInput(); 
-   // const { current, location } = weatherData; 
+    //const { current, location } = weatherData; 
+
     
    return (
-        <LinearGradient
-            colors={['rgba(228, 238, 100, 1)',  
-                     'rgba(69, 82, 252, 1)', 
-                     'rgba(69, 82, 252, 0.5)', 
-                    ]}
-            style={styles.gradient}
-        >
-            <View style={styles.container}>
-                <SafeAreaView style={{flex: 1}}>
-                    <View style={styles.searchContainer}>
-                        <SearchBar />
-                    </View>
-                    <View>
-                        <CurrentWeather />
-                    </View>
-                </SafeAreaView>
-            </View>
-        </LinearGradient>
-       
+            <SafeAreaView style={{flex: 1}}>
+                <View style={styles.searchContainer}>
+                    <SearchBar />
+                </View>
+                <View style={styles.container}>
+                    <CurrentWeather />
+                </View>
+            </SafeAreaView>
     );
 };
 
